@@ -32,19 +32,30 @@ const StyledWarningAlert = styled(StyledPrimaryAlert)`
     color: #1513A0;
 `;
 
+const Button = styled.button`
+    background: none;
+    border: none;
+    cursor: pointer;
+`;
 
-const Alert = ({children, color}) => {
+
+const Alert = ({children, color, onClose}) => {
+
+    const AlertProps = {
+        color,
+        onClose
+    };
 
         if (color === "primary") {
             return (
-                <StyledPrimaryAlert color>{children}<CrossIcon /></StyledPrimaryAlert>
+                <StyledPrimaryAlert {...AlertProps}>{children}<Button><CrossIcon /></Button></StyledPrimaryAlert>
             )}
         if (color === "error") {
                 return (
-                    <StyledErrorAlert color>{children}<CrossIcon /></StyledErrorAlert>
+                    <StyledErrorAlert {...AlertProps}>{children}<Button><CrossIcon /></Button></StyledErrorAlert>
                 ) 
             }
-        return <StyledWarningAlert color>{children}<CrossIcon /></StyledWarningAlert>
+        return <StyledWarningAlert {...AlertProps}>{children}<Button><CrossIcon /></Button></StyledWarningAlert>
 };
 
 

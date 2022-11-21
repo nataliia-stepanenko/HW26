@@ -21,7 +21,7 @@ function App() {
     <hr/>
 
     <button onClick={handleOpen}>Open alert</button>
-    {isOpenedAlert && <Alert color="warning" onClose={handleClose}>Some text</Alert>}
+    {isOpenedAlert && <Alert color="primary" onClose={handleClose}>Some text</Alert>}
     </>
   );
 }
