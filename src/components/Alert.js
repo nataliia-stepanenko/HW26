@@ -41,28 +41,24 @@ const Button = styled.button`
 
 const Alert = ({children, color, onClose}) => {
 
-    const AlertProps = {
-        color,
-        onClose
-    };
-
         if (color === "primary") {
             return (
-                <StyledPrimaryAlert {...AlertProps}>{children}<Button><CrossIcon /></Button></StyledPrimaryAlert>
+                <StyledPrimaryAlert>{children}<Button onClick={onClose}><CrossIcon /></Button></StyledPrimaryAlert>
             )}
         if (color === "error") {
                 return (
-                    <StyledErrorAlert {...AlertProps}>{children}<Button><CrossIcon /></Button></StyledErrorAlert>
+                    <StyledErrorAlert>{children}<Button onClick={onClose}><CrossIcon /></Button></StyledErrorAlert>
                 ) 
             }
-        return <StyledWarningAlert {...AlertProps}>{children}<Button><CrossIcon /></Button></StyledWarningAlert>
+    return ( <StyledWarningAlert>{children}<Button onClick={onClose}><CrossIcon /></Button></StyledWarningAlert>)
 };
 
 
 
 Alert.propTypes = {
     color: PropTypes.oneOf(["primary", "error", "warning"]),
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    onClose: PropTypes.func,
 };
 
 export default Alert;
