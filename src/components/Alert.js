@@ -3,14 +3,14 @@ import styled from "styled-components";
 
 import { ReactComponent as CrossIcon} from "../assets/icons/cross.svg";
 
-const StyledPrimaryAlert = styled.div`
+const StyledAlert = styled.div`
     width: 1440px;
     height: 64px;
+    margin: 40px;
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 16px 32px;
-    gap: 10px;
     background: #605DEC;
     font-family: 'Nunito Sans';
     font-weight: 600;
@@ -20,16 +20,26 @@ const StyledPrimaryAlert = styled.div`
     align-items: center;
     text-align: center;
     justify-content: space-between;
-    color: #F6F6FE;
-`;
-
-const StyledErrorAlert = styled(StyledPrimaryAlert)`
-    background: #EB5757;
-`;
-
-const StyledWarningAlert = styled(StyledPrimaryAlert)`
-    background: #FFD12F;
-    color: #1513A0;
+    background: ${(props) => {
+        switch (props.color) {
+            case "primary":
+                return "#605DEC";
+            case "error":
+                return "#EB5757";
+            case "warning":
+                return "#FFD12F";
+        }
+    }};   
+    color: ${(props) => {
+        switch (props.color) {
+            case "primary":
+                return "#F6F6FE";
+            case "error":
+                return "#FAFAFA";
+            case "warning":
+                return "#1513A0";
+        }
+    }};   
 `;
 
 const Button = styled.button`
@@ -38,19 +48,9 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
-
 const Alert = ({children, color, onClose}) => {
 
-        if (color === "primary") {
-            return (
-                <StyledPrimaryAlert>{children}<Button onClick={onClose}><CrossIcon /></Button></StyledPrimaryAlert>
-            )}
-        if (color === "error") {
-                return (
-                    <StyledErrorAlert>{children}<Button onClick={onClose}><CrossIcon /></Button></StyledErrorAlert>
-                ) 
-            }
-    return ( <StyledWarningAlert>{children}<Button onClick={onClose}><CrossIcon /></Button></StyledWarningAlert>)
+    return ( <StyledAlert color={color}>{children}<Button onClick={onClose}><CrossIcon /></Button></StyledAlert>)
 };
 
 

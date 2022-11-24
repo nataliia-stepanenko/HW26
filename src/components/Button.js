@@ -4,16 +4,31 @@ import styled from "styled-components";
 const StyledPrimaryButton = styled.button`
     border-radius: 4px;
     font-family: 'Nunito Sans';
-    font-size: 16px;
     color: #FAFAFA;
     border: 1px solid transparent;
-    border-radius: 4px;
     background: #605DEC;
-    padding: 12px 20px;
-    height: 48px;
-    width: 76px;
     margin: 8px;
     cursor: pointer;
+    padding: ${(props) => {
+	    switch (props.size) {
+            case "large":
+                return "20px 11.5px";
+            case "medium":
+                return "20px 13px";
+            case "small":
+                return "16px 9px";
+	    }
+	  }};
+    font-size: ${(props) => {
+        switch (props.size) {
+            case "large":
+                return "18px";
+            case "medium":
+                return "16px";
+            case "small":
+                return "16px";
+        }
+    }};
 
     :hover {
         background: #1513A0;
@@ -39,27 +54,6 @@ const StyledSecondaryButton = styled(StyledPrimaryButton)`
     }
 `;
 
-const StyledPrimaryLargeButton = styled(StyledPrimaryButton)`
-    width: 81px;
-    font-size: 18px;
-`;
-const StyledSecondaryLargeButton = styled(StyledSecondaryButton)`
-    width: 81px;
-    font-size: 18px;
-`;
-
-const StyledPrimarySmallButton = styled(StyledPrimaryButton)`
-    padding: 8px 16px;
-    width: 68px;
-    height: 40px;
-`;
-const StyledSecondarySmallButton = styled(StyledSecondaryButton)`
-    padding: 8px 16px;
-    width: 68px;
-    height: 40px;
-`;
-
-
 
 const Button = ({color, size, disabled, children, onClick}) => {
     const buttonProps = {
@@ -70,18 +64,7 @@ const Button = ({color, size, disabled, children, onClick}) => {
     };
 
     if (color === "secondary") {
-        if (size === "large") {
-            return <StyledSecondaryLargeButton {...buttonProps}>{children}</StyledSecondaryLargeButton>
-        } else if (size === "small") {
-            return <StyledSecondarySmallButton {...buttonProps}>{children}</StyledSecondarySmallButton>
-        }
         return <StyledSecondaryButton {...buttonProps}>{children}</StyledSecondaryButton>
-    }
-
-    if (size === "large") {
-        return <StyledPrimaryLargeButton {...buttonProps}>{children}</StyledPrimaryLargeButton>
-    } else if (size === "small") {
-        return <StyledPrimarySmallButton {...buttonProps}>{children}</StyledPrimarySmallButton>
     }
     return <StyledPrimaryButton {...buttonProps}>{children}</StyledPrimaryButton>
 }
@@ -97,6 +80,7 @@ Button.propTypes = {
 Button.defaultProps = {
     color: "primary",
     disabled: false,
+    size: "small",
 };
 
 
